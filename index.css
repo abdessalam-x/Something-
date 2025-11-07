@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&display=swap');
+
+:root {
+    --primary-color: #a82030; /* Rouge bordeaux profond */
+    --secondary-color: #f7e7e9; /* Rose très clair */
+    --accent-color: #e995a0; /* Rose de pétale */
+    --text-light: #fefefe;
+    --text-dark: #333;
+    --font-fancy: 'Great Vibes', cursive;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+    background-color: var(--secondary-color);
+}
+
+/* --- Général --- */
+.section {
+    display: none; /* Cache toutes les sections par défaut */
+    width: 100vw;
+    min-height: 100vh;
+    box-sizing: border-box;
+    position: relative;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.section.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+/* --- Section d'Introduction --- */
+#intro-section {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #ffd4da 100%);
+    flex-direction: column;
+}
+
+.intro-content {
+    text-align: center;
+    padding: 20px;
+}
+
+.intro-content h1 {
+    font-family: var(--font-fancy);
+    font-size: 4em;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    opacity: 0; /* Pour l'animation JS */
+}
+
+.flower-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.intro-flower {
+    width: 250px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    opacity: 0; /* Pour l'animation JS */
+    transform: translateY(20px);
+    transition: all 0.5s ease-out;
+}
+
+.intro-flower:hover {
+    transform: scale(1.05) translateY(20px);
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+.click-text {
+    font-family: var(--font-body);
+    font-size: 1.2em;
+    color: var(--primary-color);
+    margin-top: 20px;
+    opacity: 0; /* Pour l'animation JS */
+}
+
+/* Animations d'apparition pour l'intro */
+.fade-in-up {
+    animation: fadeInUp 1s forwards;
+}
+.fade-in-up-delay {
+    animation: fadeInUp 1s forwards 1s; /* Délai de 1s */
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Section Principale (Le Jardin d'Amour) --- */
+#main-section {
+    background-color: var(--secondary-color);
+    flex-direction: column;
+    padding: 20px;
+    justify-content: flex-start; /* Aligne le contenu en haut */
+}
+
+.main-header {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    background: rgba(255,255,255,0.7);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+.main-header h2 {
+    font-family: var(--font-fancy);
+    font-size: 3.5em;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.content-wrapper {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 1fr; /* Une seule colonne par défaut */
+    gap: 40px;
+    align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+    .content-wrapper {
+        grid-template-columns: 1.5fr 1fr; /* Deux colonnes sur grands écrans */
+    }
+}
+
+
+/* --- Message Box --- */
+.love-message-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* Pour gérer le border-right de typing effect */
+    transition: transform 0.3s ease-in-out;
+}
+
+.love-message-box:hover {
+    transform: translateY(-5px);
+}
+
+.message-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%; /* Image ronde */
+    object-fit: cover;
+    margin-bottom: 25px;
+    border: 5px solid var(--accent-color);
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    opacity: 0; /* Pour l'animation JS */
+    transform: translateX(-50px);
+    transition: all 0.8s ease-out;
+}
+
+.love-message-box h1 {
+    font-family: var(--font-fancy);
+    font-size: 3.5em; /* Ajusté */
+    color: var(--primary-color);
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+    word-wrap: break-word;
+    border-right: 3px solid var(--primary-color); /* Curseur du typing effect */
+    padding-right: 5px; /* Petit espace pour le curseur */
+}
+
+.signature {
+    font-family: var(--font-body);
+    font-size: 1.3em;
+    color: var(--primary-color);
+    margin-top: 30px;
+    font-weight: 300;
+    opacity: 0; /* Pour l'animation JS */
+    transform: translateX(50px);
+    transition: all 0.8s ease-out;
+}
+
+.heart-icon {
+    color: var(--primary-color);
+    margin-left: 10px;
+    animation: beat 1.5s infinite ease-in-out;
+}
+
+@keyframes beat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+/* Animations pour le contenu de la section principale */
+.reveal-left {
+    animation: slideInLeft 1s forwards;
+}
+.reveal-right {
+    animation: slideInRight 1s forwards 0.5s; /* Délai */
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* --- Galerie Photo --- */
+.photo-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.gallery-photo {
+    width: 100%;
+    height: 511px; /* Hauteur fixe pour les photos */
+    object-fit: cover; /* Recadre l'image pour couvrir la zone */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out;
+    opacity: 0; /* Pour l'animation JS */
+}
+
+.gallery-photo:hover {
+    transform: scale(1.02);
+}
+
+/* Animations pour les photos de la galerie */
+.fade-in-delay {
+    animation: fadeIn 1s forwards 1.5s; /* Délai pour chaque photo */
+}
+.fade-in-delay-2 {
+    animation: fadeIn 1s forwards 2s; /* Délai incrémental */
+}
+.fade-in-delay-more {
+     animation: fadeIn 1s forwards 2.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- Bouton Surprise --- */
+.surprise-button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-family: var(--font-body);
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: center; /* Centrer le bouton dans le grid */
+    opacity: 0; /* Pour l'animation JS */
+}
+
+.surprise-button:hover {
+    background-color: #c93547;
+    transform: translateY(-3px);
+}
+
+.surprise-button i {
+    margin-left: 10px;
+}
+
+
+/* --- Animation des Pétales en fond (plus sophistiquée) --- */
+.petal-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Assurez-vous qu'il est en arrière-plan */
+}
+
+/* Les pétales sont générés par JS pour plus de contrôle */
+.petal {
+    position: absolute;
+    display: block;
+    background: var(--accent-color); /* Ou background-image: url('assets/petale_unique.png'); */
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: fallPetals linear infinite;
+    z-index: 1; /* Au-dessus du fond mais sous le contenu */
+}
+
+@keyframes fallPetals {
+    0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0; }
+}
+
+/* --- Responsive Design (optimisations supplémentaires) --- */
+@media (max-width: 992px) {
+    .intro-content h1 {
+        font-size: 3.2em;
+    }
+    .main-header h2 {
+        font-size: 2.8em;
+    }
+    .love-message-box h1 {
+        font-size: 2.8em;
+    }
+    .message-photo {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 576px) {
+    .intro-content h1 {
+        font-size: 2.5em;
+    }
+    .intro-flower {
+        width: 180px;
+    }
+    .click-text {
+        font-size: 1em;
+    }
+    .main-header h2 {
+        font-size: 2em;
+    }
+    .love-message-box {
+        padding: 20px;
+    }
+    .love-message-box h1 {
+        font-size: 2em;
+    }
+    .message-photo {
+        width: 120px;
+        height: 120px;
+    }
+    .signature {
+        font-size: 1.1em;
+    }
+    .photo-gallery {
+        padding: 15px;
+        gap: 15px;
+    }
+    .gallery-photo {
+        height: 150px;
+    }
+    .surprise-button {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+}
